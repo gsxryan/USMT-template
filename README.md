@@ -5,7 +5,7 @@ Microsoft User State Migration Tool.  Utilizing example configuration to optimiz
 1. This was created before OneDrive was optimized for Desktop backup and restore where transfer speeds are no longer as essential for optimizing T2 workflows.
 2. This includes data directories that are not in standard OneDrive Protected folders (ALL C:\USERcreated-dirs)
 
- One Click actions.  The goal is to create a standard with zero drift, so technicians are not stuck deciding how to backup a users machine in a custom manner, greatly accelerating the pace for desktop migration completion.  Service tickets post service are also greatly reduced due to grabbing more custom directories, settings, etc as detailed below.
+ One Click actions.  The goal is to create a standard with zero drift, so technicians are not stuck deciding how to backup a users machine in a custom manner, greatly accelerating the pace for desktop migration completion.  Service tickets post migration are also greatly reduced due to grabbing more custom directories, settings, etc as detailed below.
 Additional strategies include copying data as quickly as possible using USB 3.0 & SSD. Resulting in 5-20x reduced time for machine processing.  Additionally, this enables remote servicing, so less on-site presence is required.
 
 ```
@@ -31,7 +31,7 @@ Copy the contents to your USB Drive.  Use the Root of D:\ or,
         On the Old machine:
             1. Right Click > Run as Admin on USMT.exe
             2. Enter the Foldername identification (username)
-            3. NonStandard Software Installed appears (its not the most accurate, but can help)
+            3. NonStandard Software Installed appears (not the most accurate, but can help)
                 Backup commences, Wait for a complete message
                 Note the Accounts being added/processed.
             4. Close and safely remove the USB Drive
@@ -61,3 +61,36 @@ Copy the contents to your USB Drive.  Use the Root of D:\ or,
 # Known Issues
 - Currently only supports 64-bit processors. (x86 can easily be requested)
 - Cannot run from UNC Path (Must run from USB or Physical attached storage (D:, etc)
+
+# Default XML changes
+
+     v0.9 - Fixed Issues:
+
+1 .USB drives turning off, interrupt during transfers, Added Power Settings to Disable USB Selective Suspending (power saving)
+
+2. Feature: edit $CurrentDir = (Get-Location).Drive.name and associations to be able to move the repo around
+
+        v0.8 - 	Fixed Issues:
+
+3. Desktop background migration is good if it was custom set.  However, if it was default the background will be set to the windows 7 look.  Taking out desktop background migration
+
+Added Configurations:
+
+1. Allowed Public Folder due to some program data (Bionumerics).
+2. excluded Public Desktop (to remove duplicate remote tools folder, and old broken installed shortcuts) [excludefolders.xml + config_min.xml]
+```<pattern type="File">%CSIDL_COMMON_DESKTOPDIRECTORY%\* [*]</pattern>```
+3. Added exclusion for desktop background image (do not migrate the Win7 default background or themes)
+4. removed a lot of other components from migration that could conflict with Win10 image state, **The goal is bare minimum migration to improve speed, and not modify standard Win10 image state.**
+
+		-Config_min.xml
+		-<component displayname="Microsoft-Windows-uxtheme" migrate="no" ID="http://www.microsoft.com/migration/1.0/migxmlext/cmi/microsoft-windows-uxtheme/microsoft-windows-uxtheme/settings"/>
+	        -<component displayname="Microsoft-Windows-themeui" migrate="no" ID="http://www.microsoft.com/migration/1.0/migxmlext/cmi/microsoft-windows-themeui/microsoft-windows-themeui/settings"/>
+
+5. Added Chrome/Firefox favorites/settings Migration to MigAppMinChromeFF.xml:
+6. Added Log that lists all files migrated for verification: /listfiles:{USMT-Data-USERname\filelist.log}
+7. Excluded additional files extensions on the root of C: ExcludeFolders.xml
+```
+-<pattern type="File">C:\ [*.bot]</pattern>
+-<pattern type="File">C:\ [*.dat]</pattern>
+-<pattern type="File">%SYSTEMDRIVE%\Temp\* [*]</pattern>
+```
