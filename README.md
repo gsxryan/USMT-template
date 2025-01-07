@@ -20,6 +20,11 @@ https://ehlertech.com/customxmls/
 NOTE: USMT.exe is a binary compiled from sourcecode/USMT.ps1 using Powershell to EXE compiler.  The reason for this is to make execution of the script less steps for T2, and better standardization with the mobility of mounted drives / USB.
 ### How to Build
 
+Clone repository
+Source Microsoft Binaries
+install the Windows ADK from https://developer.microsoft.com/en-us/windows/hardware/windows-assessment-deployment-kit, and browse to the folder that contains scanstate.exe and loadstate.exe (usually C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\User State Migration Tool), and make a copy. 
+Build this tool into EXE: https://github.com/MScholtes/PS2EXE
+Or, download the Release listed to the right.
 
 ### How to Use
 
