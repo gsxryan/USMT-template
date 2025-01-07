@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<migration urlid="http://www.usmtgui.com/migration/1.0/migxmlext/ExcludeSystemFolders">
+ 
+    <_locDefinition>
+     <_locDefault _loc="locNone"/>
+     <_locTag _loc="locData">displayName</_locTag>
+    </_locDefinition>
+ 
+    <component type="Documents" context="UserAndSystem" id="documents"> 
+        <displayName>ExcludeSystemFolders</displayName> 
+ 
+        <role role="data"> 
+            <rules> 
+                <Exclude> 
+                    <objectSet /> 
+                </Exclude> 
+ 
+                <unconditionalExclude> 
+                    <objectSet>
+						<pattern type="File">C:\boot\* [*]</pattern>
+                        <pattern type="File">C:\_SMSTaskSequence\* [*]</pattern>
+                        <pattern type="File">C:\WINDOWS.old\* [*]</pattern>
+                        <pattern type="File">C:\WINDOWS.old.*\* [*]</pattern>
+                        <pattern type="File">C:\SWSetup\* [*]</pattern>
+                        <pattern type="File">C:\MININT\* [*]</pattern>
+                        <pattern type="File">C:\ [prot_ins.sys]</pattern>
+			<pattern type="File">%CSIDL_COMMON_DESKTOPDIRECTORY%\* [*]</pattern>
+			<pattern type="File">C:\ [*.bot]</pattern>
+			<pattern type="File">C:\ [*.dat]</pattern>
+			<pattern type="File">%SYSTEMDRIVE%\Temp\* [*]</pattern>
+						<pattern type="File">C:\ProgramData\* [*]</pattern>
+						<pattern type="File">C:\Program Files\* [*]</pattern>
+						<pattern type="File">C:\Program Files (x86)\* [*]</pattern>
+						<pattern type="File">C:\Quarantine\* [*]</pattern>
+						<pattern type="File">C:\PerfLogs\* [*]</pattern>
+						<pattern type="File">C:\MSOCache\* [*]</pattern>
+						<pattern type="File">C:\Dell\* [*]</pattern>
+						<pattern type="File">C:\Intel\* [*]</pattern>
+						<pattern type="File">C:\Windows\* [*]</pattern>
+						<script>MigXmlHelper.GenerateDrivePatterns ("* [*.tmp]", "Fixed")</script>
+                    </objectSet> 
+                </unconditionalExclude> 
+            </rules> 
+        </role> 
+    </component>
+ 
+</migration>

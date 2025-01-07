@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<migration urlid="http://www.microsoft.com/migration/1.0/migxmlext/IncludeMacros">
+<component type="Documents" context="UserAndSystem">
+<displayName>Copy Files Office Macros </displayName>
+<role role="Data">
+<rules>
+<include>
+<objectSet>
+<script>MigXmlHelper.GenerateUserPatterns ("File","%USERPROFILE%\AppData\Roaming\Microsoft\Excel\XLSTART\* [*]","TRUE")</script>
+</objectSet>
+</include>
+<locationModify script="MigXmlHelper.Move ('%CSIDL_PPROFILE%\AppData\Roaming\Microsoft\Excel\XLSTART\')">
+<objectSet>
+<script>MigXmlHelper.GenerateDrivePatterns ("* [*]","Fixed")</script>
+</objectSet>
+</locationModify>
+</rules>
+</role>
+</component>
+</migration>

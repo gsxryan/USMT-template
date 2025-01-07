@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<migration urlid="http://www.microsoft.com/migration/1.0/migxmlext/migapp">
+
+	<library prefix="MigSysHelper">MigSys.dll</library>
+	
+  <_locDefinition>
+    <_locDefault _loc="locNone"/>
+    <_locTag _loc="locData">displayName</_locTag>
+  </_locDefinition>
+
+	<namedElements>
+		<!-- Global -->
+		<environment name="GlobalEnvX64">
+			<conditions>
+				<condition>MigXmlHelper.IsNative64Bit()</condition>
+			</conditions>
+			<variable name="HklmWowSoftware">
+				<text>HKLM\SOFTWARE\Wow6432Node</text>
+			</variable>
+			<variable name="ProgramFiles32bit">
+				<text>%ProgramFiles(x86)%</text>
+			</variable>
+			<variable name="CommonProgramFiles32bit">
+				<text>%CommonProgramFiles(x86)%</text>
+			</variable>
+		</environment>
+		<environment name="GlobalEnv">
+			<conditions>
+				<condition negation="Yes">MigXmlHelper.IsNative64Bit()</condition>
+			</conditions>
+			<variable name="HklmWowSoftware">
+				<text>HKLM\Software</text>
+			</variable>
+			<variable name="ProgramFiles32bit">
+				<text>%ProgramFiles%</text>
+			</variable>
+			<variable name="CommonProgramFiles32bit">
+				<text>%CommonProgramFiles%</text>
+			</variable>
+		</environment>
+
+		<!-- Global USER -->
+		<environment context="User" name="GlobalEnvX64User">
+			<conditions>
+				<condition>MigXmlHelper.IsNative64Bit()</condition>
+			</conditions>
+			<variable name="VirtualStore_ProgramFiles32bit">
+				<text>%CSIDL_VIRTUALSTORE_PROGRAMFILES(X86)%</text>
+			</variable>
+			<variable name="VirtualStore_CommonProgramFiles32bit">
+				<text>%CSIDL_VIRTUALSTORE_COMMONPROGRAMFILES(X86)%</text>
+			</variable>
+		</environment>
+		<environment context="User" name="GlobalEnvUser">
+			<conditions>
+				<condition negation="Yes">MigXmlHelper.IsNative64Bit()</condition>
+			</conditions>
+			<variable name="VirtualStore_ProgramFiles32bit">
+				<text>%CSIDL_VIRTUALSTORE_PROGRAMFILES%</text>
+			</variable>
+			<variable name="VirtualStore_CommonProgramFiles32bit">
+				<text>%CSIDL_VIRTUALSTORE_COMMONPROGRAMFILES%</text>
+			</variable>
+		</environment>
+		<!-- For Windows Live Mail -->
+		<!-- For Adobe Creative Suite-->
+		<!-- Office paths -->
+		<!-- Outlook Pst Rule -->
+		<rules name="OutlookPstPab" context="User">
+			<include>
+				<objectSet>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [01020fff]</pattern>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e0324]</pattern>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e6600]</pattern>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e6700]</pattern>
+					<content filter="MigSysHelper.ExtractSingleFileAnsiBin()">
+						<objectSet>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e0324]</pattern>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e6600]</pattern>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e6700]</pattern>
+						</objectSet>
+					</content>
+				</objectSet>
+			</include>
+			<include>
+				<objectSet>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001f0324]</pattern>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001f6600]</pattern>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001f6700]</pattern>
+					<content filter="MigSysHelper.ExtractSingleFileUnicodeBin()">
+						<objectSet>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e0324]</pattern>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e6600]</pattern>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001e6700]</pattern>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001f0324]</pattern>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001f6600]</pattern>
+							<pattern type="Registry">%OUTLOOKPROFILESPATH%* [001f6700]</pattern>
+						</objectSet>
+					</content>
+				</objectSet>
+			</include>
+			<contentModify script="MigSysHelper.SetPstPathInMapiStruct ()">
+				<objectSet>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [0102*]</pattern>
+				</objectSet>
+			</contentModify>
+			<contentModify script="MigSysHelper.UpdateMvBinaryMapiStruct ()">
+				<objectSet>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [0102*]</pattern>
+				</objectSet>
+			</contentModify>
+			<contentModify script="MigSysHelper.UpdateMvBinaryMapiStruct ()">
+				<objectSet>
+					<pattern type="Registry">%OUTLOOKPROFILESPATH%* [1102*]</pattern>
+				</objectSet>
+			</contentModify>
+		</rules>
+	</namedElements>
+	<!-- Lotus Notes 6, 7 and 8 -->
+	<!-- RealPlayer Basic 11 -->
+	<!-- Windows Live -->
+	<!-- QuickTime Player (5, 6 and 7) -->
+	<!-- iTunes (6, 7 and 8) -->
+	<!-- Microsoft Office 2003 -->
+	<!-- Microsoft Office 2007 -->
+	<!-- WinZip -->
+	<!-- Adobe Reader 9.0 -->
+	<!-- Adobe Creative Suite 2 -->
+	<!-- Adobe Photoshop CS 9-->
+	<!-- Lotus SmartSuite -->
+	<!-- Yahoo! Messenger -->
+	<!-- Microsoft Works 9.0 -->
+	<!-- Microsoft Money Plus Home & Business 2008 -->
+	<!-- Zune Software 3 -->
+	<!-- Quicken Deluxe 2009 -->
+	<!-- Peachtree 2009 -->
+	<!--WordPerfect Office X3  -->
+	<!--WordPerfect Office 12  -->
+	<!--word perfectoffice11  -->
+	<!--AOL Instant messenger 5 and 6 -->
+	<!-- Corel Paintshop Pro 9 -->
+	<!-- Mozilla Firefox -->
+	<component context="UserAndSystem" type="Application">
+		<displayName _locID="migapp.firefox">Mozilla Firefox</displayName>
+		<environment name="GlobalEnv"></environment>
+		<environment name="GlobalEnvX64"></environment>
+		<role role="Settings">
+			<!-- <detection>
+        <conditions>
+			<condition>MigXmlHelper.DoesObjectExist("Registry","%HklmWowSoftware%\Mozilla\Mozilla Firefox *.*\bin [PathToExe]")</condition>
+			<condition>MigXmlHelper.DoesObjectExist("Registry","%HklmWowSoftware%\Mozilla\Mozilla Firefox\*.*\Main [PathToExe]")</condition>
+        </conditions>
+     </detection> -->
+			<rules context="User">
+				<destinationCleanup>
+					<objectSet>
+						<pattern type="File">%CSIDL_LOCAL_APPDATA%\Mozilla\Firefox\Profiles\*\Cache\* [*]</pattern>
+					</objectSet>
+				</destinationCleanup>
+				<include>
+					<objectSet>
+						<pattern type="File">%CSIDL_APPDATA%\Mozilla\Firefox\* [*]</pattern>
+						<pattern type="File">%CSIDL_LOCAL_APPDATA%\Mozilla\Firefox\Profiles\* [*]</pattern>
+					</objectSet>
+				</include>
+				<exclude>
+					<objectSet>
+						<pattern type="File">%CSIDL_APPDATA%\Mozilla\Firefox\Crash Reports\* [*]</pattern>
+						<pattern type="File">%CSIDL_APPDATA%\Mozilla\Firefox\Profiles\*\ [pluginreg.dat]</pattern>
+						<pattern type="File">%CSIDL_APPDATA%\Mozilla\Firefox\Profiles\*\ [pluginreg.dat]</pattern>
+						<pattern type="File">%CSIDL_LOCAL_APPDATA%\Mozilla\Firefox\Profiles\*\Cache\* [*]</pattern>
+					</objectSet>
+				</exclude>
+				<merge script="MigXmlHelper.SourcePriority()">
+					<objectSet>
+						<pattern type="File">%CSIDL_APPDATA%\Mozilla\Firefox\* [*]</pattern>
+						<pattern type="File">%CSIDL_LOCAL_APPDATA%\Mozilla\Firefox\Profiles\* [*]</pattern>
+					</objectSet>
+				</merge>
+			</rules>
+		</role>
+	</component>
+	<!-- Mozilla Thunderbird -->
+	<!-- Safari 4 -->
+	<!-- Opera 9 -->
+	<!-- Google Chrome -->
+	<component context="UserAndSystem" type="Application">
+		<displayName _locID="migapp.chrome1">Google Chrome</displayName>
+		<environment name="GlobalEnv"></environment>
+		<environment name="GlobalEnvX64"></environment>
+		<role role="Settings">
+			<destinationCleanup>
+				<objectSet>
+					<pattern type="File">%CSIDL_LOCAL_APPDATA%\Google\Chrome\User Data\*\Cache\* [*]</pattern>
+				</objectSet>
+			</destinationCleanup>
+			<!--<detection>
+        <conditions>
+			<condition>MigXmlHelper.DoesObjectExist("Registry","HKLM\Software\Google\Chrome\")</condition>
+			<condition>MigXmlHelper.DoesObjectExist("Registry","HKLM\Software\WOW6432Node\Google\Chrome\")</condition>
+        </conditions>
+      </detection> -->
+			<rules context="User">
+				<include>
+					<objectSet>
+						<pattern type="File">%CSIDL_LOCAL_APPDATA%\Google\Chrome\User Data\* [*]</pattern>
+					</objectSet>
+				</include>
+				<exclude>
+					<objectSet>
+						<pattern type="File">%CSIDL_LOCAL_APPDATA%\Google\Chrome\User Data\*\Cache\* [*]</pattern>
+					</objectSet>
+				</exclude>
+				<merge script="MigXmlHelper.SourcePriority()">
+					<objectSet>
+						<pattern type="File">%CSIDL_LOCAL_APPDATA%\Google\Chrome\User Data\* [*]</pattern>
+					</objectSet>
+				</merge>
+			</rules>
+		</role>
+	</component>
+	<!--Ad-aware 6 Professional  -->
+	<!-- Skype 3 -->
+	<!-- Google Talk 1 -->
+	<!-- Google Picasa 3 -->
+	<!-- Microsoft Office 2010 -->
+	<!-- Microsoft Office 15 -->
+	<!-- Microsoft Office 16 -->
+</migration>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<migration urlid="http://www.usmtgui.com/migration/1.0/migxmlext/ExcludeUserFolders">
+ 
+    <_locDefinition>
+     <_locDefault _loc="locNone"/>
+     <_locTag _loc="locData">displayName</_locTag>
+    </_locDefinition>
+ 
+    <component type="Documents" context="UserAndSystem" id="documents"> 
+        <displayName>ExcludeUserFolders</displayName> 
+ 
+        <role role="data"> 
+            <rules> 
+                <Exclude> 
+                    <objectSet /> 
+                </Exclude> 
+ 
+                <unconditionalExclude> 
+                    <objectSet>
+						<pattern type="File">%CSIDL_MYDOCUMENTS%\* [*]</pattern>
+						<pattern type="File">%CSIDL_COMMON_DOCUMENTS%\* [*]</pattern>
+                        <pattern type="File">%CSIDL_DESKTOP%\* [*]</pattern>
+						<pattern type="File">%CSIDL_DESKTOPDIRECTORY%\* [*]</pattern>
+						<pattern type="File">%CSIDL_COMMON_DESKTOPDIRECTORY%\* [*]</pattern>
+						<pattern type="File">%CSIDL_MYMUSIC%\* [*]</pattern>
+						<pattern type="File">%CSIDL_COMMON_MUSIC%\* [*]</pattern>
+						<pattern type="File">%CSIDL_MYPICTURES%\* [*]</pattern>
+						<pattern type="File">%CSIDL_COMMON_PICTURES%\* [*]</pattern>
+						<pattern type="File">%CSIDL_MYVIDEO%\* [*]</pattern>
+						<pattern type="File">%CSIDL_COMMON_VIDEO%\* [*]</pattern>
+<!--						<pattern type="File">%CSIDL_SENDTO%\* [*]</pattern>
+						<pattern type="File">%CSIDL_RECENT%\* [*]</pattern>
+						<pattern type="File">%CSIDL_APPDATA%\* [*]</pattern>
+						<pattern type="File">%CSIDL_LOCAL_APPDATA%\* [*]</pattern> -->
+						
+						<script>MigXmlHelper.GenerateDrivePatterns ("* [*.tmp]", "Fixed")</script>
+                    </objectSet> 
+                </unconditionalExclude> 
+            </rules> 
+        </role> 
+    </component>
+ 
+</migration>

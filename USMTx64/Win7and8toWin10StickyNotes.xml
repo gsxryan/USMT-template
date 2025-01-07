@@ -1,0 +1,56 @@
+<migration urlid="http://www.usmtgui.com/LegacyWin7-8StickyNotes">
+
+	<!-- Move USMTafterburner log-->
+    <component context="User" type="Application">
+        <displayName>USMTafterburnerLog</displayName>
+        <role role="Settings">
+            <rules>
+                <include>
+                    <objectSet>
+                        <pattern type="File">%CSIDL_COMMON_DOCUMENTS%\UPCentral\USMTab\ [ModernAppSettingsBackup.lst]</pattern>
+                    </objectSet>
+                </include>
+								<locationModify script="MigXmlHelper.RelativeMove('%CSIDL_COMMON_DOCUMENTS%\UPCentral\USMTab\','%CSIDL_LOCAL_APPDATA%\USMTModernAppsBackup\')">
+				<objectSet>
+						<pattern type="File">%CSIDL_COMMON_DOCUMENTS%\UPCentral\USMTab\ [ModernAppSettingsBackup.lst]</pattern>
+				</objectSet>                                                
+				</locationModify>
+            </rules>
+        </role>
+    </component>
+
+<!-- Move USMTafterburner -->
+    <component context="User" type="Application">
+        <displayName>USMTafterburner</displayName>
+        <role role="Settings">
+            <rules>
+                <include>
+                    <objectSet>
+                        <pattern type="File">%CSIDL_COMMON_DOCUMENTS%\UPCentral\USMTab\ [USMTafterburner.exe]</pattern>
+                    </objectSet>
+                </include>
+					<locationModify script="MigXmlHelper.RelativeMove('%CSIDL_COMMON_DOCUMENTS%\UPCentral\USMTab\','%CSIDL_DESKTOPDIRECTORY%')">
+				<objectSet>
+						<pattern type="File">%CSIDL_COMMON_DOCUMENTS%\UPCentral\USMTab\ [USMTafterburner.exe]</pattern>
+				</objectSet>                                                
+				</locationModify>
+            </rules>
+        </role>
+    </component>
+	
+	
+<!-- Old Sticky notes migration to windows 10.1607 onwards -->
+    <component context="UserAndSystem" type="Application">
+        <displayName>LegacyWin7-8StickyNotes</displayName>
+        <role role="Settings">
+            <rules context="User">
+                <include>
+                    <objectSet>
+                        <pattern type="File">%CSIDL_APPDATA%\Microsoft\Sticky Notes\ [StickyNotes.snt]</pattern>
+                    </objectSet>
+                </include>
+            </rules>
+        </role>
+    </component>
+
+</migration>
