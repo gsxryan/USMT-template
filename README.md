@@ -1,5 +1,5 @@
 # USMT-template
-Microsoft User State Migration Tool.  Utilizing example configuration to optimize the User and Admin experience.  
+Microsoft User State Migration Tool, modified highly, to enable one-click backup-and one-click restores.  In support of optimizing T2 support teams productivity.  Configurations highly tuned to capture the most common "forgotten" data to migrate.  OneDrive does not usually back up these non-standard data locations commonly entered as problem tickets after the migration work.  Sometimes with data loss occuring due to the mis-communication, and the device disposal policies.  Utilizing example configuration to optimize the User and Admin experience.  
 
 ### Context
 1. This was created before OneDrive was optimized for Desktop backup and restore where transfer speeds are no longer as essential for optimizing T2 workflows.
